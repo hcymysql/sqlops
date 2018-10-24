@@ -93,6 +93,7 @@ sqlops_approve/sql/sql_db.sql
 ---------------------
 注：
 1、客户端版本使用mysql5.5或者mariadb10.X。
+
 5.6会出现Warning: Using a password on the command line interface can be insecure，导致上线失败。
 
 2、php文件里的涉及连接数据库的用户名和密码要修改，这块没有做成统一个DB配置文件调用。
