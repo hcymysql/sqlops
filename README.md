@@ -99,6 +99,8 @@ sqlops_approve/sql/sql_db.sql
 
 19、rollback.php（生成回滚反向SQL）
 
+20、mail/mail.php（提交工单时发送邮件通知）
+
 ---------------------
 注：
 1、客户端版本使用mysql5.5或者mariadb10.X。
