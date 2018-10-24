@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>上线数量统计</title>
+    <script src="js/echarts.common.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <h1 align='center' class='STYLE2'>上线数量统计</h1>
+    <hr />
+    <!-- <div id="main" style="width: 1600px;height:400px"></div> -->
+    <div id="main" style="height:400px"></div>
+    <script type="text/javascript">
+              var  myChart = echarts.init(document.getElementById('main'));
+              var arr1=[],arr2=[];
+              function arrTest(){
+                $.ajax({
+                  type:"post",
+                  async:false,
+                  url:"db.php",
+                  data:{},
+                  dataType:"json",
+                  success:function(result){
+                    if (result) {
+                      for (var i = 0; i < result.length; i++) {
+                          arr1.push(result[i].ops_db);
+                          arr2.push(result[i].count);
+                      }
+                    }
+                  }
+                })
+                return arr1,arr2;
+              }
+              arrTest();
+              var  option = {
+                    tooltip: {
+			trigger: 'axis'
+                        //show: true
+                    },
+                    legend: {
+                       data:['数量']
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : arr1
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            "name":"数量",
+                            "type":"bar",
+                            "data":arr2
+                        }
+                    ]
+                };
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            // }
+    </script>
+</body>

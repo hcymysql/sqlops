@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+#main { width:1170px; margin:0 auto; margin-top:67px;}
+.page_left { float:left; width:auto; text-align:center; }
+.page_right { float:right; width:80%;}
+a { color:#555555; }
+
+#bread_crumbs { margin:0; }
+#bread_crumbs .crumb_menu { height:30px; line-height:30px;}
+.page_right .crumb_box { width:auto;}
+
+.page_left dt {
+    background-color: #996600;    
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    height: 34px;
+    line-height: 34px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 150px;
+}
+.page_left dd {    
+	border:1px dotted #DDDDDD;
+	background-color:#ECECEC;	
+	margin-bottom:10px;     
+}
+.page_left dd a { height:37px; line-height:37px; display:block;}
+.page_left dd.selected { background-color:#666666;}
+.page_left dd.selected a{ color:#FFFFFF;}
+.page_left dd:hover { background-color:#666666; }
+.page_left dd:hover a { color:#FFFFFF; }
+.page_content { padding:20px;}
+.page_content a { color:#428bca;}
+.page_content ul, .page_content ol { list-style:inherit;}
+
+.introduction{ margin-top:75px; margin-left:6%;}
+.intro_block{ width:30%; height:180px; float:left; margin-left:1%; margin-bottom:12px; padding:1%;}
+.color_blue{background-color:#428BCA;}
+.color_green{background-color:#5de628;}
+.color_red{background-color:#fa6b4e;}
+.color_orange{background-color:#f7a439;}
+.color_purple{background-color:#9a67f8;}
+.color_cyan{background-color:#23cdc3;}
+
+.introduction .intro_block h1{ font-size:36px;font-weight:bold; text-align:center; margin-top:40px;}
+.introduction .intro_block h1 a{ color:#FFF;  text-decoration:none;}
+.introduction .intro_block span{ clear:both; top:20px; position:relative; font-size:16px; color:#FFF;}
+
+
+
+/* Jumbotrons
+-------------------------------------------------- */
+
+/* Base class
+------------------------- */
+.jumbotron {
+  position: relative;
+  padding: 40px 0;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+  background: #34495D; /* Old browsers */
+
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.jumbotron p {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+
+/* Link styles (used on .masthead-links as well) */
+.jumbotron a {
+  color: #fff;
+  color: rgba(255,255,255,.5);
+  -webkit-transition: all .2s ease-in-out;
+     -moz-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+.jumbotron a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,.25);
+}
+
+
+
