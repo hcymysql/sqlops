@@ -1,29 +1,42 @@
 10.26日更新
+
 1)增加一键生成反向SQL回滚功能。
 
 演示地址 http://fander.jios.org:8008/
+
 普通上线账号：guest ，密码：123456
+
 管理员审批账号：admin，密码：123456
+
 感谢网友陈俊聪友情提供云主机。
+
 
 -----------------------------------------------------
 一、环境安装Centos6.8
+
 1、php环境安装
+
 # yum install httpd php mysql php-mysql php-devel php-pear libssh2 libssh2-devel -y
 
 2、安装php ssh2扩展
+
 pecl install -f ssh2
 
 3、修改/etc/php.ini
+
 在最后一行添加
+
 extension=ssh2.so
 
 4、关闭selinux
+
 # vim /etc/selinux/config
+
 SELINUX=disabled
 
 5、美团网SQLAdvisor安装
 请移步 https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
+
 
 6、binlog2sql安装
 请移步 https://github.com/danfengcao/binlog2sql
