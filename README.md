@@ -111,6 +111,7 @@ sqlops_approve/sql/sql_db.sql
 
 ---------------------
 #create审核
+
 1、警告！表没有主键
 
 2、警告！表主键字段名必须是id。
