@@ -122,7 +122,7 @@ sqlops_approve/sql/sql_db.sql
 
 4、警告！表字段没有中文注释，COMMENT应该有默认值，如COMMENT '姓名'
 
-5、警告！表没有中文注释，例：COMMENT='新版授信项表'
+5、警告！表没有中文注释，例：COMMENT='学生信息表'
 
 6、警告！表缺少utf8字符集，否则会出现乱码
 
@@ -135,6 +135,19 @@ sqlops_approve/sql/sql_db.sql
 10、警告！表update_time字段缺少索引。
 
 11、警告！表缺少create_time字段，方便抽数据使用，且给加上索引。
+
+12、警告！表中的索引数已经超过5个，索引是一把双刃剑，它可以提高查询效率但也会降低插入和更新的速度并占用磁盘空间
+
+13、警告！表应该为timestamp类型加默认系统当前时间。例如：update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+
+14、警告！表 utf8_bin应使用默认的字符>集核对utf8_general_ci
+
+15、警告！用DECIMAL代替FLOAT和DOUBLE存储精确浮点数。浮点数的缺点是会引起精度问题，对货币等对精度敏感的数据，应该用定点数decimal类型存储。
+
+16、警告！避免使用外键，外键会导致父表和子表之间耦合，十分影响SQL性能，出现过多的锁等待，甚至会造成死锁。
+
+17、警告！表字段类型应设置为datetime精确到秒。例：将datetime(3)改成datetime。
+   警告！表字段类型应设置为timestamp精确到秒。例：将timestamp(3)改成datetime。
 
 ---------------------
 # alter审核
