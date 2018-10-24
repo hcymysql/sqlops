@@ -45,6 +45,7 @@ SELINUX=disabled
 
 上线流程为：
 开发提交SQL，系统自动审核（sql_review.php），审核通过后生成我的工单待管理员批复并且发邮件通知，管理员人工确认审核通过后，开发点击执行完成上线。
+https://raw.githubusercontent.com/hcymysql/sqlops/master/sqlops%E6%B5%81%E7%A8%8B.png
 
 sqlops_approve/sql/sql_db.sql
 
