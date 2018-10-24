@@ -140,7 +140,7 @@ sqlops_approve/sql/sql_db.sql
 
 13、警告！表应该为timestamp类型加默认系统当前时间。例如：update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 
-14、警告！表 utf8_bin应使用默认的字符>集核对utf8_general_ci
+14、警告！表 utf8_bin应使用默认的字符集核对utf8_general_ci
 
 15、警告！用DECIMAL代替FLOAT和DOUBLE存储精确浮点数。浮点数的缺点是会引起精度问题，对货币等对精度敏感的数据，应该用定点数decimal类型存储。
 
