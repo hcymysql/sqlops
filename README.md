@@ -42,12 +42,17 @@ SELINUX=disabled
 请移步 https://github.com/danfengcao/binlog2sql
 
 -----------------------------------------------------
+
 上线流程为：开发提交SQL，系统自动审核（sql_review.php），审核通过后生成我的工单待管理员批复并且发邮件通知，管理员人工确认审核通过后，开发点击执行完成上线。
 
 sqlops_approve/sql/sql_db.sql
+
 涉及的表解释说明
+
 1、login_user.sql  (sqlops平台系统登录表）
+
 2、sql_order_wait.sql  （工单记录表）
+
 3、dbinfo.sql	（数据库上线信息表）
 
 
