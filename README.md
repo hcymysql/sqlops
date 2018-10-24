@@ -108,3 +108,18 @@ sqlops_approve/sql/sql_db.sql
 5.6会出现Warning: Using a password on the command line interface can be insecure，导致上线失败。
 
 2、php文件里的涉及连接数据库的用户名和密码要修改，这块没有做成统一个DB配置文件调用。
+
+---------------------
+#create审核
+1、警告！表没有主键
+2、警告！表主键字段名必须是id。
+3、提示：id自增字段默认值为1，auto_increment=1
+4、警告！表字段没有中文注释，COMMENT应该有默认值，如COMMENT '姓名'
+5、警告！表没有中文注释，例：COMMENT='新版授信项表'
+6、警告！表缺少utf8字符集，否则会出现乱码
+7、警告！表存储引擎应设置为InnoDB
+8、警告！表缺少update_time字段，方便抽数据使用，且给加上索引。
+9、警告！表update_time字段类型应设置timestamp。
+10、警告！表update_time字段缺少索引。
+11、警告！表缺少create_time字段，方便抽数据使用，且给加上索引。
+
