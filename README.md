@@ -46,7 +46,6 @@ SELINUX=disabled
 上线流程为：
 开发提交SQL，系统自动审核（sql_review.php），审核通过后生成我的工单待管理员批复并且发邮件通知，管理员人工确认审核通过后，开发点击执行完成上线。
 
-
 sqlops_approve/sql/sql_db.sql
 
 涉及的表解释说明
@@ -97,6 +96,7 @@ sqlops_approve/sql/sql_db.sql
 18、sqladvisor_config.php（访问SQLAdvisor服务器的IP、SSH端口、SSH用户名、SSH密码）
 
 19、rollback.php（生成回滚反向SQL）
+
 ---------------------
 注：
 1、客户端版本使用mysql5.5或者mariadb10.X。
