@@ -1,4 +1,5 @@
 10.22日更新
+https://raw.githubusercontent.com/hcymysql/sqlops/master/sqlops%E6%B5%81%E7%A8%8B.png
 
 1)增加一键生成反向SQL回滚功能。
 
