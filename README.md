@@ -136,10 +136,11 @@ sqlops_approve/sql/sql_db.sql
 
 11、警告！表缺少create_time字段，方便抽数据使用，且给加上索引。
 
-
+---------------------
 #alter审核
 
 检查项：
+
 1、警告！不支持create index语法，请更改为alter table add index语法。
 
 2、警告！更改表结构要减少与数据库的交互次数，应改为，例alter table t1 add index IX_uid(uid),add index IX_name(name)
@@ -147,3 +148,13 @@ sqlops_approve/sql/sql_db.sql
 3、表记录小于100万行，可以由开发自助执行。否则表太大请联系DBA执行!
 
 4、支持删除索引，但不支持删除字段
+
+---------------------
+# insert审核
+
+检查项：
+
+1、警告：insert 表1 select 表2，会造成锁表。
+
+
+
