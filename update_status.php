@@ -8,6 +8,16 @@ if($q) {
         $con=mysqli_connect("192.168.199.199","admin","123456","sql_db","3306");
 	$sql = "update sql_order_wait set status=1,finish_status=1,approver='{$login_admin_user}' WHERE id={$id}";
 	if(mysqli_query($con,$sql)){
+		$sql_get_mail = "select b.email,a.ops_order,a.ops_order_name from sql_order_wait a join login_user b on a.ops_name = b.user where a.id={$id}";
+		$result = mysqli_query($con,$sql_get_mail);
+		while($row = mysqli_fetch_array($result)){
+			$email_order=$row[0];
+			$ops_order=$row[1];
+			$ops_order_name=$row[2];
+		}
+		require 'mail/mail.php';
+		$sendmail = new mail($ops_order,'',$email_order,$ops_order_name,'');
+		$sendmail->noticeReply();
 		header("location:wait_order.php");
 	}
 	else{
