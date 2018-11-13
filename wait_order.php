@@ -10,7 +10,7 @@ session_start();
 $prvi = $_SESSION['prvi'];
 $login_user=$_SESSION['username'];
 
-    if($prvi!=1){  
+    if($prvi==0){
         echo "非法访问！你没有权限审批工单！<br>";
         //echo '<meta http-equiv="Refresh" content="2;url=my_order.php"/>';
 	exit;
@@ -21,13 +21,14 @@ $mysql_username='admin';
 $mysql_password='123456';
 $mysql_database='sql_db';
 
-$conn=mysqli_connect($mysql_server_name,$mysql_username,$mysql_password,$mysql_database,"3306") or die("error connecting");
-mysqli_query($conn,"set names 'utf8'"); 
+$conn=mysql_connect($mysql_server_name,$mysql_username,$mysql_password) or die("error connecting");
+mysql_query("set names 'utf8'"); 
+mysql_select_db($mysql_database);
 
 $perNumber=50; //每页显示的记录数  
 $page=$_GET['page']; //获得当前的页面值  
-$count=mysqli_query($conn,"select count(*) from sql_order_wait"); //获得记录总数  
-$rs=mysqli_fetch_array($count);   
+$count=mysql_query("select count(*) from sql_order_wait"); //获得记录总数  
+$rs=mysql_fetch_array($count);   
 $totalNumber=$rs[0];  
 $totalPage=ceil($totalNumber/$perNumber); //计算出总页数  
 /*if (!isset($page)) {  
@@ -40,16 +41,16 @@ if (empty($page)) {
 
 $startCount=($page-1)*$perNumber; //分页开始,根据此方法计算出开始的记录 
 
-$sql1 = "select user from login_user where user = '${login_user}' and privilege = 1";
-$result1 = mysqli_query($conn,$sql1);
-if (mysqli_num_rows($result1) > 0) {
+$sql1 = "select user from login_user where user = '${login_user}' and privilege in(1,2)";
+$result1 = mysql_query($sql1,$conn);
+if (mysql_num_rows($result1) > 0) {
 	echo "Hi，管理员，等待你审批工单。<br>";
-	$sql ="select a.* from sql_order_wait a order by id DESC";
+	$sql ="select a.* from sql_order_wait a order by id DESC limit $startCount,$perNumber";
 }
 else{
 	$sql ="select a.* from sql_order_wait a join login_user b on a.ops_name = b.user where a.ops_name = '${login_user}'";
 }
-$result = mysqli_query($conn,$sql);
+$result = mysql_query($sql,$conn);
 
 echo "<h1 align='center' class='STYLE2'><a href='wait_order.php'>数据库上线工单查询</a></h1>";
 echo "<hr />";
@@ -60,38 +61,39 @@ echo "<form action='order_result.php' method='get'>
   </p>
 </form>";
 echo "<table class='bordered' width='1000px' height='100px' border='1' align='center'>";
+//echo "<table width='1000px' height='100px' border='1' align='center'>";
 echo "<tr>	
 	    <th>工单号</th>
             <th>申请人</th>
             <th>数据库名</th>
             <th>申请时间</th>
 	    <th>工单名称</th>
-            <th>上线SQL</th>
 	    <th>审批结果</th>
 	    <th>操作</th>
           </tr>";
-while($row = mysqli_fetch_array($result)) 
+while($row = mysql_fetch_array($result)) 
 {
-$status = $row['status']?"<span style=''>已审批</span>":"<a href='update.php?id={$row['id']}&login_user=$login_user'>待审批</a>";
+$status = $row['status']?"<span style=''>已审批</span>":"<a href='update.php?id={$row['id']}&login_user=$login_user&prvi=$prvi'>待审批</a>";
 $exec_status = $row['status'];
 $exec_finish_status = $row['finish_status'];
 echo "<tr>";
-echo "<td width='100'>{$row['ops_order']}</td>";
-echo "<td width='60'>{$row['ops_name']}</td>";
-echo "<td width='50'>{$row['ops_db']}</td>";
-echo "<td width='80' style='word-wrap:all'>{$row['ops_time']}</td>";
-echo "<td style='word-wrap:break-word'><pre>{$row['ops_order_name']}</pre></td>";
-echo "<td style='word-wrap:break-word'><pre>{$row['ops_content']}</pre></td>";
-if($prvi==1){
+echo "<td width='50'>{$row['ops_order']}</td>";
+echo "<td width='30' style='word-break:break-all'>{$row['ops_name']}</td>";
+echo "<td width='40'>{$row['ops_db']}</td>";
+echo "<td width='25'>{$row['ops_time']}</td>";
+//echo "<td width='100' onclick=\"document.location.href='sql_statement.php target='_blank''\" style='cursor:pointer;'>{$row['ops_order_name']}</td>";
+echo "<td width='100'><a href='sql_statement.php?id={$row['id']}' target='_blank'>".$row['ops_order_name']."</a></td>";
+//echo "<td style='word-wrap:break-word'>{$row['ops_content']}</td>";
+if($prvi==1 || $prvi==2){
 	if($exec_status==0){
-		echo "<td width='60'>$status</br></td>";
+		echo "<td width='50'>$status</br></td>";
 	}
 	if($exec_status==1){
-		echo "<td width='60'>$status</br>
-		审批人：</br>{$row['approver']}</td>";
+		echo "<td width='50'>$status</br>
+		审批人:{$row['approver']}</td>";
 	}
 	if($exec_status==2){
-		echo "<td width='80'>审批不通过</br>
+		echo "<td width='50'>审批不通过</br>
 		审批人：</br>{$row['approver']} </td>";
 	}
 }
@@ -99,18 +101,20 @@ else{
 	echo "<td width='60'>等待审批中</td>";
 }
 #######################################################
+if($prvi==1){
 if($exec_finish_status==1){
-	echo "<td width='80'><a href='execute.php?id={$row['id']}'>执行工单</a></td>";
+	echo "<td width='50'><a href='execute.php?id={$row['id']}'>执行工单</a></td>";
 }
 else if($exec_finish_status==2){
-	echo "<td width='80'>已执行完</br>";
+	echo "<td width='50'>已执行完</br>";
 	echo "<a href='rollback.php?id={$row['id']}'>生成反向SQL</a></td>";
 }
 else{
-	echo "<td width='80'>没审批不能执行</td>";
+	echo "<td width='50'>没审批不能执行</td>";
 	//echo "<td width='80'><a href='cancel.php?id={$row['id']}'>自行撤销工单</a></td>";
 } 
 echo "</tr>";
+}
 }
 echo "</table>";
 
