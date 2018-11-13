@@ -1,6 +1,11 @@
 <?php
 $id = $_GET['id'];
 $login_user = $_GET['login_user'];
+$prvi = $_GET['prvi'];
+if($prvi == 2){
+	echo "你是内审和安全组的人，没有权限审批工单！</br>";
+	exit;
+}
 ?>
 <form action="update_status.php" method="get"> 
     <select name="q">
