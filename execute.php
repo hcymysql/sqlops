@@ -4,8 +4,19 @@ $id = $_GET['id'];
 //echo $sql; 
 
 ?>
-<form action="execute_status.php" method="get"> 
-    <select name="q">
+<script>
+function ss(){
+var slt=document.getElementById("aa");
+if(slt.value==""){
+alert("你还没做出选择呢！选择是或者否！");
+return false;
+}
+return true;
+}
+</script>
+
+<form action="execute_status.php" method="get" onsubmit=" return ss()"> 
+    <select name="q" id="aa">
     <option value="">是否执行？</option>
     <option value="是">是</option>
     <option value="否">否</option>
