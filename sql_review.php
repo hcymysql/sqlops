@@ -15,6 +15,13 @@ $alter_array=array();
 $alter_parm=array();
 $dml_parm=array();
 $Keywords = array('data', 'desc', 'user', 'describe');
+$ddl_sql=array();
+
+if(!preg_match('/;/i',$parm)){
+	echo "<big><font color='#FF0000'>警告！SQL语句后面要加分号;结尾, MySQL解析器规定分号才可以执行SQL。</font></big></br>";
+	exit;               
+}
+
 
 require 'db_config.php';
 
@@ -196,7 +203,7 @@ if($multi_sql[$x]){
                 echo '<big><font color="#FF0000">警告！没有where条件，delete会全表更新，禁止执行！！！</font></big></br>';
                 exit;
             }
-			$con3=mysqli_connect($ip,$user,$pwd,$db,$port);
+	    $con3=mysqli_connect($ip,$user,$pwd,$db,$port);
             $result = mysqli_query($con3,"explain  ".$multi_sql[$x]);
             while($row = mysqli_fetch_array($result)){
                   $record_rows=$row[8];
@@ -219,7 +226,7 @@ if($multi_sql[$x]){
             //echo '<big><font color=\"#0000FF\">开始调用美团网SQLAdvisor进行第二次索引检查</font></big></br>';
             require 'sqladvisor_config.php';
             
-            if ($message === ''){
+            if ($message == ''){
                      echo "删除的where条件字段索引已经创建了,无需创建.</br>";
             }else{
                      echo "<big><font color=\"#FF0000\">删除的where条件字段没有创建索引，建议添加如下索引：</font></big></br>";
@@ -265,12 +272,12 @@ if($multi_sql[$x]){
 			}
 			if(in_array('key',$parmArr)){
 				  $countkey = array_count_values($parmArr);
-                  if($countkey['key']>=15){
+                  if($countkey['key']>=5){
                           echo "<big><font color=\"#FF0000\">警告！表中的索引数已经超过5个，索引是一把双刃剑，它可以提高查询效率但也会降低插入和更新的速度并占用磁盘空间，请让dba使用pt-duplicate-key-checker --user=root --password=xxxx --host=localhost --socket=/tmp/mysql.sock来检查重复的索引</font></big></br>";
                           $c++;
                   }
 				  $countkey = array_count_values($parmArr);
-                  if($countkey['index']>=15){
+                  if($countkey['index']>=5){
                            echo "<big><font color=\"#FF0000\">警告！表中的索引数已经超过5个，索引是一把双刃剑，它可以提高查询效率但也会降低插入和更新的速度
 并占用磁盘空间。</font></big></br>";
                            $c++;
@@ -385,6 +392,19 @@ if($multi_sql[$x]){
 					    echo "</br>";
 					    echo $parmArr[2]."表记录小于150万行，可以由开发自助执行。</br>";
 				   }
+				   /*
+				   else	if($record_rows<=40000000){
+					    //echo $parmArr[2]."</br>";
+					    for($i=3;$i<count($parmArr);++$i){ 
+						//echo $parmArr[$i].'&nbsp'; 
+						array_push($ddl_sql,$parmArr[$i]);
+					    }
+					    $ddl_sql_statement=join(" ",$ddl_sql);
+				 	    echo $ddl_sql_statement."</br>";
+					    $at==1;
+					    //echo "<a href='pt_osc.php?id={$row['id']}'>通过pt-osc工具执行</a>
+					    break;
+				   }*/
 			       else{
 					    echo '<big><font color="#FF0000">'.$parmArr[2].'表记录是：'.$record_rows.' 行，表太大请联系DBA执行!!!</font></big></br>';
 					    exit;
@@ -416,12 +436,24 @@ $sql_count=$sql_count+1;
         exit;
     }
 
-    if (count($dml_parm) != 1 && count($dml_parm) == count(array_unique($dml_parm))){
-        echo "<p>";
-        echo "<big><font color='#FF0000'>警告！DML不同的操作要分开写，不要写在一个事务里。</font></big><p>";        
-	$c_create=$c_insert=$c_alter=$c_update=$c_delete=0;
+    /*if (count($alter_parm) != 1){
+	echo "<big><font color='#FF0000'>警告！DDL更改表结构一次只能写一条SQL！</font></big></br>";
+	exit;
+    }*/
+
+} //end for
+
+
+    $dml_parm_unique=array_values(array_unique($dml_parm));
+    if(count($dml_parm) != 1) {
+	       if (count($dml_parm_unique) != 1){
+		        if ($dml_parm_unique[0] != $dml_parm_unique[1]){
+    			     echo "<p>";
+       	 		   echo "<big><font color='#FF0000'>警告！DDL和DML不同的操作语句要分开写，不要写在一个事务里。分开提交SQL工单。</font></big><p>"; 
+               exit;
+		        }
+	       }
     }
-}
 
 if($c_create==1 || $c_insert==1 || $c_alter==1 || $c_update==1 || $c_delete==1){
       echo '</br>';
