@@ -37,10 +37,11 @@
 </div>
 <div class="jumbotron" style="background-color:#FFF; color:#333; padding:10px;">
   <div class="container">
-  <p>输入SQL语句</p>
+  <!-- <p>输入SQL语句</p> -->
   </div>
 </div>
 <form action="sql_review.php" method="post" name="sql_statement" id="form1">
+<fieldset><legend>输入你的SQL：</legend>
   <label></label>
   <div align="center">
     <label>
@@ -55,9 +56,8 @@
 	echo "<option value=\"".$row[0]."\">".$row[0]."</option>"."<br>";
         }?>
         </select><td>
-    </tr>
-<textarea name="sql_statement" type="text" rows="100" cols="100" value="请输入SQL语句...;" size="1000000" style="width:745px;height:200px;color:blue;font-size:24px;border: 5px dashed #FF9933" onfocus="if (value =='请输入SQL语句...'){value =''}" onblur="if (value ==''){value='请输入SQL语句...'}" />
-请输入SQL语句...</textarea>
+    </tr></br></br>
+<textarea name="sql_statement" type="text" rows="100" cols="100" value="select count(*) from t1 group by name;" size="1000000" style="width:745px;height:200px;color:blue;font-size:24px; onfocus="if (value =='select count(*) from t1 group by name;'){value =''}" onblur="if (value ==''){value='select count(*) from t1 group by name;'}" />select count(*) from t1 group by name;</textarea>
     <br />
     <br />
 <input name="sql_order" type="text" style="width:300px;" maxlength="2000" value="请输入工单名称.."  
@@ -71,6 +71,7 @@
     <input name="Submit" type="submit" class="STYLE3" value="提交审核" />
     </label>
   </div>
+</fieldset>
 </form>
 <table width="724" border="0" align="center">
   <tr>
