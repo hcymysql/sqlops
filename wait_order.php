@@ -60,7 +60,7 @@ echo "<form action='order_result.php' method='get'>
     <input name='submit'type='submit' value='查询' />
   </p>
 </form>";
-echo "<table class='bordered' width='1000px' height='100px' border='1' align='center'>";
+echo "<table style='table-layout:fixed;word-break:break-all' class='bordered' class='bordered' width='1000px' height='100px' border='1' align='center'>";
 //echo "<table width='1000px' height='100px' border='1' align='center'>";
 echo "<tr>	
 	    <th>工单号</th>

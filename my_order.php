@@ -49,7 +49,7 @@ $result = mysql_query($sql,$conn);
 echo "<h1 align='center' class='STYLE2'><a href='my_order.php'>数据库上线工单查询</a></h1>";
 echo "<hr />";
 
-echo "<table class='bordered' width='1000px' height='100px' border='1' align='center'>";
+echo "<table style='table-layout:fixed;word-break:break-all' class='bordered' class='bordered' width='1000px' height='100px' border='1' align='center'>";
 echo "<tr>	
 	    <th>工单号</th>
             <th>申请人</th>
