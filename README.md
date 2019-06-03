@@ -23,7 +23,7 @@ SQL自动审核主要完成两方面目的：
 
 1)增加一键生成反向SQL回滚功能。
 
-演示地址 http://fander.asuscomm.com:8008
+演示地址 http://fander.asuscomm.com:8008/sqlops_approve/index.php
 
 普通上线账号：guest ，密码：123456
 
