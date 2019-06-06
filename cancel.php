@@ -1,4 +1,14 @@
 <?php
+
+    session_start();
+
+    //检测是否登录，若没登录则转向登录界面  
+    if(!isset($_SESSION['userid'])){
+        header("Location:index.html");
+        exit("你还没登录呢。");
+    }
+
+
 $id = $_GET['id'];
 ?>
 <form action="cancel_status.php" method="get"> 

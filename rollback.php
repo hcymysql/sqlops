@@ -1,10 +1,20 @@
 <?php
 
+    session_start();
+
+    //检测是否登录，若没登录则转向登录界面  
+    if(!isset($_SESSION['userid'])){
+        header("Location:index.html");
+        exit("你还没登录呢。");
+    }
+
+
+
 $id = $_GET['id'];
 
 //ini_set("default_socket_timeout", 60);
 
-$conn=mysqli_connect("192.168.199.199","admin","123456","sql_db","3306");
+$conn=mysqli_connect("192.168.188.166","admin","wdhcy159753","sql_db","3333");
 mysqli_query($conn,"set names 'utf8'");
 $result = mysqli_query($conn,"SELECT a.ip,a.dbname,a.user,a.pwd,a.port,b.ops_content,b.binlog_information FROM dbinfo a JOIN sql_order_wait b ON a.dbname = b.ops_db WHERE b.id='".$id ."'");
 while($row = mysqli_fetch_array($result))
@@ -28,16 +38,16 @@ echo "生成反向SQL如下：</br>";
 
 //print_r($binlog_information);
 
-$rollback_sql="cd /usr/local/binlog2sql/binlog2sql;/usr/bin/python binlog2sql.py --flashback -h${ip} -u${user} -p'${pwd}' -P${port} --start-file='$binlog_information[0]' --stop-file='$binlog_information[2]' --start-position='$binlog_information[1]' --stop-position='$binlog_information[3]'";
+$rollback_sql="cd /root/binlog2sql/binlog2sql;/usr/bin/python binlog2sql.py --flashback -h${ip} -u${user} -p'${pwd}' -P${port} --start-file='$binlog_information[0]' --stop-file='$binlog_information[2]' --start-position='$binlog_information[1]' --stop-position='$binlog_information[3]'";
 
 //echo $rollback_sql;
 
 
 ##########执行回滚###################
 	$remote_user="root";
-	$remote_password="gta@2015";
+	$remote_password="wdhcy159753@";
 	$script=$rollback_sql;
-	$connection = ssh2_connect('192.168.199.199',22);
+	$connection = ssh2_connect('192.168.155.253',60000);
 	ssh2_auth_password($connection,$remote_user,$remote_password);
 	$stream = ssh2_exec($connection,$script,NULL,$env=array(),10,10);
 	$correctStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
@@ -47,7 +57,7 @@ $rollback_sql="cd /usr/local/binlog2sql/binlog2sql;/usr/bin/python binlog2sql.py
 	$message=stream_get_contents($errorStream);
 	$measage_stdio=stream_get_contents($correctStream);
 
-		//echo $message."<br>";
+		echo $message."<br>";
 		echo '<pre>' .nl2br($measage_stdio). '</pre>'."<br>";
 		//echo  nl2br(nl2br($measage_stdio)) . "<br>";
     		echo "<br>";
