@@ -582,11 +582,11 @@ mysqli_query($conn,$ops_sql);
 mysqli_close($conn);
 
 ######发邮件给管理员审核SQL工单######
-/*
+
 require 'mail/mail.php';
 $sendmail = new mail($order_id,$_SESSION['real_user'],$dev_user_mail,$sql_order,$dbname,$approver);
 $sendmail->execCommand(); 
-*/
+
 
 }//end if $r
 else{
