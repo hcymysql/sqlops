@@ -1,6 +1,7 @@
 <?php
 
-function index($arr1){
+//function index($arr1){
+function index(){
     ini_set('date.timezone','Asia/Shanghai');
 
     require '../conn.php';
@@ -13,7 +14,7 @@ function index($arr1){
     public $stat_month;
     public $counts;
   }
-  while($row = mysqli_fetch_array($result1,MYSQL_ASSOC)){
+  while($row = mysqli_fetch_array($result1,MYSQLI_ASSOC)){
     $cons=new Connections();
     $cons->stat_month = $row['stat_month'];
     //$user->user_max = $row['user_max'];
