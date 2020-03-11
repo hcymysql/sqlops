@@ -8,8 +8,8 @@ __1）sql_check.php --> SQL语法校验功能__
 
 mysql: [Warning] Using a password on the command line interface can be insecure.
 
-
-_execute_status.php 执行上线_
+---------------------------------------------------------------------------------------
+__execute_status.php 执行上线__
 
 这里须要调用MariaDB的mysql客户端，因为MySQL5.6高版本会抛出警告，命令行里带密码不安全，会影响SQL语言检测结果。
 
