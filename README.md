@@ -47,3 +47,55 @@ SQL自动审核主要完成两方面目的：
 2、对要执行的SQL做分析，触碰事先定义好的规则来判断这个SQL是否可以自动审核通过，未通过审核的需要人工处理。
 
 
+# 环境安装
+
+1、PHP环境安装
+
+# yum install httpd php mysql php-mysql php-devel php-pear libssh2 libssh2-devel -y
+
+2、安装PHP SSH2扩展
+
+pecl install -f ssh2
+
+
+3、修改/etc/php.ini
+
+在最后一行添加
+
+extension=ssh2.so
+
+4、关闭selinux
+
+# vim /etc/selinux/config
+
+SELINUX=disabled
+
+
+5、美团网SQLAdvisor安装
+
+请移步 
+
+https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
+
+
+# 部署
+
+ 
+
+将php-sqlreview.zip解压缩到/var/www/html/目录下
+
+ 
+
+1、导入dbinfo.sql（DB配置信息表）和operation.sql（SQL工单记录表）
+
+ 
+
+2、修改db_config.php（DB配置信息的IP、端口、用户名、密码、库名）
+
+ 
+
+3、修改sqladvisor_config.php（访问SQLAdvisor服务器的IP、SSH端口、SSH用户名、SSH密码）
+
+ 
+
+4、修改sql_submit.php（记录工单表的IP、端口、用户名、密码）和（调用mysql客户端的IP、SSH端口、SSH用户名、SSH密码）
