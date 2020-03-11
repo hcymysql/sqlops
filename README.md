@@ -86,6 +86,11 @@ https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
 
 2、修改conn.php（sqlops数据库的配置信息的IP、端口、用户名、密码、库名）
 
+录入开发上线的生产数据库信息
+
+insert  into `dbinfo`(`id`,`ip`,`dbname`,`user`,`pwd`,`port`) values (1,'10.10.159.31','test','admin','hechunyang',3306);
+
+
 3、修改sqladvisor_config.php（访问SQLAdvisor服务器的IP、SSH端口、SSH用户名、SSH密码）
 
 4、修改rollback.php（访问binlog2sql服务器的IP、SSH端口、SSH用户名、SSH密码）
