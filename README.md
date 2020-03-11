@@ -15,7 +15,7 @@ __execute_status.php 执行上线__
 
 mysql: [Warning] Using a password on the command line interface can be insecure.
 
-
+-----------------------------------------------------------------------------------------
 __2）用户权限增加研发经理角色__
 
 login_user表privilege字段（0:普通研发;1:研发经理;100:DBA）
