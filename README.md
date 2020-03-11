@@ -76,6 +76,12 @@ SELINUX=disabled
 
 https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
 
+6、binlog2sql安装
+
+请移步
+
+https://github.com/danfengcao/binlog2sql
+
 
 # 部署
 
