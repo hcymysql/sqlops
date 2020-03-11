@@ -8,7 +8,8 @@
 
 mysql: [Warning] Using a password on the command line interface can be insecure.
 
-2) 用户权限增加研发经理角色
+
+2）用户权限增加研发经理角色
 
 login_user表privilege字段（0:普通研发;1:研发经理;100:DBA）
 
