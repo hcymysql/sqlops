@@ -9,13 +9,7 @@ __1）sql_check.php --> SQL语法校验功能__
 mysql: [Warning] Using a password on the command line interface can be insecure.
 
 ---------------------------------------------------------------------------------------
-__execute_status.php 执行上线__
 
-这里须要调用MariaDB的mysql客户端，因为MySQL5.6高版本会抛出警告，命令行里带密码不安全，会影响SQL语言检测结果。
-
-mysql: [Warning] Using a password on the command line interface can be insecure.
-
------------------------------------------------------------------------------------------
 __2）用户权限增加研发经理角色__
 
 login_user表privilege字段（0:普通研发;1:研发经理;100:DBA）
@@ -85,22 +79,21 @@ https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
 
 # 部署
 
- 
-
-将php-sqlreview.zip解压缩到/var/www/html/目录下
-
- 
+将https://github.com/hcymysql/sqlops/archive/master.zip
+解压缩到/var/www/html/目录下
 
 1、导入dbinfo.sql（DB配置信息表）和operation.sql（SQL工单记录表）
 
- 
-
-2、修改db_config.php（DB配置信息的IP、端口、用户名、密码、库名）
-
- 
+2、修改conn.php（sqlops数据库的配置信息的IP、端口、用户名、密码、库名）
 
 3、修改sqladvisor_config.php（访问SQLAdvisor服务器的IP、SSH端口、SSH用户名、SSH密码）
 
- 
+4、修改rollback.php（访问binlog2sql服务器的IP、SSH端口、SSH用户名、SSH密码）
 
-4、修改sql_submit.php（记录工单表的IP、端口、用户名、密码）和（调用mysql客户端的IP、SSH端口、SSH用户名、SSH密码）
+5、__execute_status.php 执行上线__
+
+这里须要调用MariaDB的mysql客户端，因为MySQL5.6高版本会抛出警告，命令行里带密码不安全，会影响SQL语言检测结果。
+
+mysql: [Warning] Using a password on the command line interface can be insecure.
+
+
