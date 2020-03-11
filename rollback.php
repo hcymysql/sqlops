@@ -12,10 +12,8 @@
 
 $id = $_GET['id'];
 
-//ini_set("default_socket_timeout", 60);
+require 'conn.php';
 
-$conn=mysqli_connect("192.168.188.166","admin","wdhcy159753","sql_db","3333");
-mysqli_query($conn,"set names 'utf8'");
 $result = mysqli_query($conn,"SELECT a.ip,a.dbname,a.user,a.pwd,a.port,b.ops_content,b.binlog_information FROM dbinfo a JOIN sql_order_wait b ON a.dbname = b.ops_db WHERE b.id='".$id ."'");
 while($row = mysqli_fetch_array($result))
 	{
@@ -45,9 +43,9 @@ $rollback_sql="cd /root/binlog2sql/binlog2sql;/usr/bin/python binlog2sql.py --fl
 
 ##########执行回滚###################
 	$remote_user="root";
-	$remote_password="wdhcy159753@";
+	$remote_password="123456";
 	$script=$rollback_sql;
-	$connection = ssh2_connect('192.168.155.253',60000);
+	$connection = ssh2_connect('127.0.0.1',22);
 	ssh2_auth_password($connection,$remote_user,$remote_password);
 	$stream = ssh2_exec($connection,$script,NULL,$env=array(),10,10);
 	$correctStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
