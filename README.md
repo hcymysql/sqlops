@@ -1,6 +1,6 @@
 2020-03-11更新：
 
-1）sql_check.php --> SQL语法校验功能
+_1）sql_check.php --> SQL语法校验功能_
 
 ![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/SQL%E8%AF%AD%E8%A8%80%E6%A0%A1%E9%AA%8C.png)
 
@@ -9,7 +9,7 @@
 mysql: [Warning] Using a password on the command line interface can be insecure.
 
 
-2）用户权限增加研发经理角色
+_2）用户权限增加研发经理角色_
 
 login_user表privilege字段（0:普通研发;1:研发经理;100:DBA）
 
