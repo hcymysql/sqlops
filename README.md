@@ -1,12 +1,17 @@
 2020-03-11更新：
 
-sql_check.php --> SQL语法校验功能
+1）sql_check.php --> SQL语法校验功能
 
 ![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/SQL%E8%AF%AD%E8%A8%80%E6%A0%A1%E9%AA%8C.png)
 
 这里须要调用MariaDB的mysql客户端，因为MySQL5.6高版本会抛出警告，命令行里带密码不安全，会影响SQL语言检测结果。
 
 mysql: [Warning] Using a password on the command line interface can be insecure.
+
+2) 用户权限增加研发经理角色
+
+login_user表privilege字段（0:普通研发;1:业务方领导;100:DBA）
+
 ----------------------------------------------------------------------------
 
 为了让DBA从日常繁琐的工作中解放出来，通过SQL自助平台，可以让开发自上线，开发提交SQL后就会自动返回优化建议，无需DBA的再次审核，
