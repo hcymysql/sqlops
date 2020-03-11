@@ -82,7 +82,7 @@ https://github.com/Meituan-Dianping/SQLAdvisor/blob/master/doc/QUICK_START.md
 将https://github.com/hcymysql/sqlops/archive/master.zip
 解压缩到/var/www/html/目录下
 
-1、导入dbinfo.sql（DB配置信息表）和operation.sql（SQL工单记录表）
+1、导入表结构sqlops_schema/sqlops_schema.sql（DB配置信息表）和（SQL工单记录表）
 
 2、修改conn.php（sqlops数据库的配置信息的IP、端口、用户名、密码、库名）
 
