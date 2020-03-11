@@ -15,7 +15,7 @@ CREATE TABLE `login_user` (
   `real_user` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `pwd` varchar(256) DEFAULT NULL,
-  `privilege` int(11) DEFAULT '0' COMMENT '0:普通研发;1:业务方领导',
+  `privilege` int(11) DEFAULT '0' COMMENT '0:普通研发;1:研发经理;100:DBA',
   PRIMARY KEY (`id`),
   UNIQUE KEY `IX_user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录表';
