@@ -7,16 +7,21 @@
 
 <?php
 
+/*
+	这里须要调用MariaDB的mysql客户端，因为MySQL5.6高版本会抛出警告，命令行里带密码不安全，会影响SQL语言检测结果。
+	mysql: [Warning] Using a password on the command line interface can be insecure.
+*/
+
 if(preg_match("/^select|^insert|^update|^delete|^replace/i",trim($multi_key_sql[$x]))){
-   $dbsql_exec="/usr/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"." -P$port $db --execute=\"EXPLAIN  ${multi_sql[$x]};\" 2>&1";}
+   $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"." -P$port $db --execute=\"EXPLAIN  ${multi_sql[$x]};\" 2>&1";}
 
 if(preg_match("/^create/i",trim($multi_key_sql[$x]))){
     $create_temp=preg_replace("/^create/i","CREATE TEMPORARY",trim($multi_key_sql[$x]));
-    $dbsql_exec="/usr/bin/mysql --default-character-set=utf8 --skip-column-names -h192.168.199.195 -uadmin -p123456 -P3306 tmp --execute=\"${create_temp};\" 2>&1";
+    $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port $db --execute=\"${create_temp};\" 2>&1";
 }
 
 if(preg_match("/^alter/i",trim($multi_key_sql[$x]))){
-   $dbsql_exec="/usr/bin/mysql --default-character-set=utf8 --skip-column-names -h192.168.199.195 -uadmin -p123456 -P3306 tmp --execute=\"${multi_sql[$x]};\" 2>&1";
+   $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port $db --execute=\"${multi_sql[$x]};\" 2>&1";
 }
 
 $exec_result=exec("$dbsql_exec",$output,$return);
