@@ -19,7 +19,7 @@ login_user表privilege字段（0:普通研发;1:研发经理;100:DBA）
 
 为了让DBA从日常繁琐的工作中解放出来，通过SQL自助平台，可以让开发自上线，开发提交SQL后就会自动返回优化建议，无需DBA的再次审核，
 从而提升上线效率，有利于建立数据库开发规范。
-
+![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/sqlops.png)
 
 借鉴了去哪网Inception的思路并且把美团网SQLAdvisor（索引优化建议）集成在一起，并结合了之前写的《DBA的40条军规》纳入了审核规则里，用PHP实现。
 目前在我公司内部使用。
