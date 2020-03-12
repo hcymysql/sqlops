@@ -30,7 +30,7 @@ $exec_result=exec("$dbsql_exec",$output,$return);
 
 if(!empty($multi_key_sql[$x])){
         if(preg_match("/^alter/i",trim($multi_key_sql[$x]))){
-		if(preg_match("/ERROR 1064/",$output[0])){
+		if(preg_match("/ERROR 1064|ERROR 1146/",$output[0])){
 			echo "&nbsp;&nbsp;&nbsp;<h3><span class='badge badge-danger'>检测出SQL语句有错误，报错信息如下：</span></h3>";
 			echo "<b>&nbsp;&nbsp;&nbsp;".$output[0]."</b></br>";
 			array_splice($output, 0, count($output));
