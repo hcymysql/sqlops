@@ -9,6 +9,16 @@ CREATE TABLE `dbinfo` (
   KEY `IX_dbname` (`dbname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据库信息表';
 
+CREATE TABLE `dbinfo_prvi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dbuser` varchar(50) DEFAULT NULL,
+  `approver` varchar(50) DEFAULT NULL,
+  `dbname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dbname` (`dbname`),
+  KEY `dbuser` (`dbuser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='审批权限表';
+
 CREATE TABLE `login_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(100) DEFAULT NULL,
@@ -43,5 +53,19 @@ CREATE TABLE `sql_order_wait` (
   KEY `IX_ops_order` (`ops_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工单表';
 
+CREATE TABLE `sql_order_error` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ops_order` bigint(11) NOT NULL COMMENT '工单号',
+  `ops_name` varchar(100) DEFAULT NULL,
+  `ops_db` varchar(50) DEFAULT NULL,
+  `ops_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ops_order_name` varchar(5000) DEFAULT NULL,
+  `ops_reason` varchar(100) DEFAULT NULL,
+  `ops_content` mediumtext,
+  `prompt_message` text,
+  PRIMARY KEY (`id`),
+  KEY `ops_name` (`ops_name`),
+  KEY `ops_time` (`ops_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工单拦截表';
 
 
