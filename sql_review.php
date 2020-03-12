@@ -70,6 +70,7 @@ if($multi_sql[$x]){
 			    $prompt_message[]= '警告！没有where条件，update会全表更新，禁止执行！';
 			    $up++;
             }
+            require 'conn.php';
             $result = mysqli_query($conn,"explain  ".$multi_sql[$x]);
             while($row = mysqli_fetch_array($result)){
                   $record_rows=$row[8];
@@ -116,6 +117,7 @@ if($multi_sql[$x]){
 			    $prompt_message[]='警告！没有where条件，delete会全表删除，禁止执行！';
 			    $de++;
 			}
+            require 'conn.php';
 			$result = mysqli_query($conn,"explain  ".$multi_sql[$x]);
 			while($row = mysqli_fetch_array($result)){
 			    $record_rows=$row[8];
@@ -317,6 +319,7 @@ if($multi_sql[$x]){
 		    array_push($alter_array,$parmArr[2]);
 		    array_push($alter_parm,$parmArr[0]);
 		    array_push($dml_parm,$parmArr[0]);
+            require 'conn.php';
 			$result = mysqli_query($conn,"explain select * from ".$parmArr[2]." ");
 			$row = mysqli_fetch_array($result);
 			$record_rows=$row[8];
