@@ -72,7 +72,7 @@ if($multi_sql[$x]){
             $con1=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
             $result = mysqli_query($conn,"explain  ".$multi_sql[$x]);
             while($row = mysqli_fetch_array($result)){
-                  $record_rows=$row[8];
+                  $record_rows=$row['rows'];
                   if($record_rows<=50000){
                       echo "</br>";
                       echo $parmArr[1]."表 where条件字段，扫描影响的行数小于50000行，可以由开发自助执行。</br>";
@@ -119,7 +119,7 @@ if($multi_sql[$x]){
             $con2=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
 			$result = mysqli_query($con2,"explain  ".$multi_sql[$x]);
 			while($row = mysqli_fetch_array($result)){
-			    $record_rows=$row[8];
+			    $record_rows=$row['rows'];
 			    if($record_rows<=50000){
 			        echo "</br>";
 			        echo $parmArr[2]."表 where条件字段，扫描影响的行数小于50000行，可以由开发自助执行。</br>";
@@ -323,7 +323,7 @@ if($multi_sql[$x]){
             $con3=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
 			$result = mysqli_query($con3,"explain select * from ".$parmArr[2]." ");
 			$row = mysqli_fetch_array($result);
-			$record_rows=$row[8];
+			$record_rows=$row['rows'];
 			if($record_rows<=1500000){
 			    echo "</br>";
 			    echo $parmArr[2]."表记录小于150万行，可以由开发自助执行。</br>";
