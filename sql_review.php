@@ -31,8 +31,8 @@ if(!preg_match('/;/i',$parm)){
 require 'conn.php';
 require 'db_config.php';
 
-$multi_sql=preg_split("/;+/",ltrim($parm));
-$multi_key_sql=preg_split("/;+/",ltrim($parm_key));
+$multi_sql=preg_split("/;+/",trim($parm));
+$multi_key_sql=preg_split("/;+/",trim($parm_key));
 $arrlength=count($multi_sql);
 echo "</br>";
 echo "<big><font color=\"#0000FF\">------你刚才选择的数据库名字是：" . $dbname . "------</font></big></br>";
@@ -47,7 +47,7 @@ require 'sql_check.php';
 echo "<hr style=FILTER: progid:DXImageTransform.Microsoft.Glow(color=#987cb9,strength=10) width=100% color=#987cb9 SIZE=1>";
 if($multi_sql[$x]){
     $parmArr_enter = str_replace("\r\n","  ",$multi_sql[$x]);
-	$parmArr = preg_split("/[\s]+/",ltrim($parmArr_enter));
+	$parmArr = preg_split("/[\s]+/",trim($parmArr_enter));
 	switch ($parmArr[0]) {
 		case 'insert':
 		    array_push($dml_parm,$parmArr[0]);
@@ -465,22 +465,17 @@ require 'conn.php';
 mysqli_query($conn,$ops_sql);
 
 ######发邮件给管理员审核SQL工单######
-
 require 'mail/mail.php';
 $sendmail = new mail($order_id,$_SESSION['real_user'],$dev_user_mail,$sql_order,$dbname,$approver);
 $sendmail->execCommand(); 
 
-
 }//end if $r
 else{
 	$pm=join("\n",$prompt_message);
-
+    require 'conn.php';
 	$ops_sql = "INSERT INTO sql_order_error (ops_order, ops_name, ops_db, ops_time, ops_order_name, ops_reason, ops_content, prompt_message) VALUES ($order_id,'$dbuser','$dbname',$ops_time,'$sql_order','$reason','$str_replace_sql','$pm')";
 	//echo $ops_sql."</br>";
-	mysqli_query($conn,"SET NAMES utf8");
-      mysqli_query($conn,$ops_sql);
-
+	mysqli_query($conn,$ops_sql);
 }
-
 
 ?>
