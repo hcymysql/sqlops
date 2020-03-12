@@ -28,7 +28,6 @@ if(!preg_match('/;/i',$parm)){
         exit;
 }
 
-require 'conn.php';
 require 'db_config.php';
 
 $multi_sql=preg_split("/;+/",trim($parm));
@@ -70,7 +69,7 @@ if($multi_sql[$x]){
 			    $prompt_message[]= '警告！没有where条件，update会全表更新，禁止执行！';
 			    $up++;
             }
-            require 'conn.php';
+            $con1=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
             $result = mysqli_query($conn,"explain  ".$multi_sql[$x]);
             while($row = mysqli_fetch_array($result)){
                   $record_rows=$row[8];
@@ -117,8 +116,8 @@ if($multi_sql[$x]){
 			    $prompt_message[]='警告！没有where条件，delete会全表删除，禁止执行！';
 			    $de++;
 			}
-            require 'conn.php';
-			$result = mysqli_query($conn,"explain  ".$multi_sql[$x]);
+            $con2=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
+			$result = mysqli_query($con2,"explain  ".$multi_sql[$x]);
 			while($row = mysqli_fetch_array($result)){
 			    $record_rows=$row[8];
 			    if($record_rows<=50000){
@@ -321,8 +320,8 @@ if($multi_sql[$x]){
 		    array_push($alter_array,$parmArr[2]);
 		    array_push($alter_parm,$parmArr[0]);
 		    array_push($dml_parm,$parmArr[0]);
-            require 'conn.php';
-			$result = mysqli_query($conn,"explain select * from ".$parmArr[2]." ");
+            $con3=mysqli_connect($ip,$user,$pwd,$db,$port) or die("数据库链接错误".mysqli_error());
+			$result = mysqli_query($con3,"explain select * from ".$parmArr[2]." ");
 			$row = mysqli_fetch_array($result);
 			$record_rows=$row[8];
 			if($record_rows<=1500000){
@@ -465,7 +464,7 @@ if(!preg_match("/alter/i",$parm)){
 	$is_ddl = 1;
 	//echo $ops_sql."</br>";
 }
-echo $ops_sql."<br>"; 
+//echo $ops_sql."<br>";
 require 'conn.php';
 mysqli_query($conn,$ops_sql);
 
