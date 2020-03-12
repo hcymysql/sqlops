@@ -218,9 +218,11 @@ if($multi_sql[$x]){
             }
 			if(!in_array('engine=innodb',$parmArr)){
 			      if(!in_array(')engine=innodb',$parmArr)){
-			          echo "<big><font color=\"#FF0000\">警告！$parmArr[2]表存储引擎应设置为InnoDB</font></big></br>";
-			          $prompt_message[]="警告！${parmArr[2]}表存储引擎应设置为InnoDB";
-			          $c++;
+                      if(!in_array('innodb',$parmArr)) {
+                          echo "<big><font color=\"#FF0000\">警告！$parmArr[2]表存储引擎应设置为InnoDB</font></big></br>";
+                          $prompt_message[] = "警告！${parmArr[2]}表存储引擎应设置为InnoDB";
+                          $c++;
+                      }
 			      }
 			}
 			if(!in_array('update_time',$parmArr)){
