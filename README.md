@@ -5,6 +5,7 @@
 密码：21j6
 
 -----------------------------------------------------------------------------
+![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/%E9%A6%96%E9%A1%B5.png)
 
 2020-03-11更新：
 
