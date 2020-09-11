@@ -50,7 +50,7 @@ if($q) {
 	if ($return == 0){
 		$input_binlog=$b[0]."\n".$b[1]."\n";
 		require 'conn.php';
-		$sql = "update sql_order_wait set finish_status=2,finish_status_second=2,binlog_information='{$input_binlog}' WHERE id={$id}";
+		$sql = "update sql_order_wait set finish_status=2,binlog_information='{$input_binlog}' WHERE id={$id}";
 		//echo $sql;
 		if(mysqli_query($conn,$sql)){
 			echo "<br>";
