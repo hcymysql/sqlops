@@ -34,7 +34,11 @@ echo "生成反向SQL如下：</br>";
 
 //print_r($binlog_information);
 
+//后端MySQL 5.6+
 $rollback_sql="/usr/bin/python /var/www/html/sqlops/binlog2sql/binlog2sql.py --flashback -h${ip} -u${user} -p'${pwd}' -P${port} --start-file='$binlog_information[0]' --stop-file='$binlog_information[3]' --start-position='$binlog_information[1]' --stop-position='$binlog_information[4]'";
+
+//后端MariaDB						
+//$rollback_sql="cd /root/binlog2sql/binlog2sql;/usr/bin/python binlog2sql.py --flashback -h${ip} -u${user} -p'${pwd}' -P${port} --start-file='$binlog_information[0]' --stop-file='$binlog_information[2]' --start-position='$binlog_information[1]' --stop-position='$binlog_information[3]'";
 
 //echo $rollback_sql;
 
