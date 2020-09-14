@@ -10,9 +10,10 @@
 
 $id = $_GET['id'];
 
-$con=mysqli_connect("192.168.188.166","admin","wdhcy159753","sql_db");
+require 'conn.php';
+
 $sql_get = "select a.ops_order_name,a.ops_content from sql_order_error a  where a.id={$id}";
-$result = mysqli_query($con,$sql_get);
+$result = mysqli_query($conn,$sql_get);
 $row = mysqli_fetch_array($result);
 echo "工单名称：".$row[0]."</br>";
 echo "<pre>".$row[1]."</pre></br>";
