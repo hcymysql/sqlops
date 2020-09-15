@@ -69,6 +69,9 @@ if($q) {
 	}
 	else{
 		 echo "<br>";
+	         if($e[0] == NULL){
+                    echo "<br>由于提交的SQL过多，PHP在传入参数变量时，内存溢出导致，可通知DBA手工执行。</br>";
+                 }	
 		 echo $e[0]."<br>";
       		 echo "<br><h1>上线失败！</h1></br>";
       		 echo "<img src='image/fail.gif'  alt='fail' />";
