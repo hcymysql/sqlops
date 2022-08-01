@@ -63,7 +63,7 @@ SQL自动审核主要完成两方面目的：
 
 1、PHP环境安装
 
-# yum install httpd php php-mysqlnd php-devel php-pear libssh2 libssh2-devel -y
+# yum install httpd mariadb php php-mysqlnd php-devel php-pear libssh2 libssh2-devel -y
 
 2、安装PHP SSH2扩展
 
