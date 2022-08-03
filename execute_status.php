@@ -31,7 +31,7 @@ if($q) {
 	//上线（客户端请使用MySQL 5.5及以下版本，或者MariaDB10版本。）
 	//MySQL 5.6版本会报Using a password on the command line interface can be insecure警告，导致上线失败。
 	// --safe-updates
-	$dbsql_exec="/usr/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"." -P$port $db --execute=\"SET tx_isolation = 'REPEATABLE-READ';START TRANSACTION WITH CONSISTENT SNAPSHOT;SHOW MASTER STATUS;".$ops_content.";COMMIT;SHOW MASTER STATUS;"."\" 2>&1" ;
+	$dbsql_exec="/usr/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"." -P$port $db --execute=\"SET transaction_isolation = 'REPEATABLE-READ';START TRANSACTION WITH CONSISTENT SNAPSHOT;SHOW MASTER STATUS;".$ops_content.";COMMIT;SHOW MASTER STATUS;"."\" 2>&1" ;
 
 	//echo $dbsql_exec."</br>";
 
