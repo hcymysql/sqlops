@@ -68,4 +68,4 @@ CREATE TABLE `sql_order_error` (
   KEY `ops_time` (`ops_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工单拦截表';
 
-
+INSERT INTO login_user values(1,'admin','管理员','admin@126.com',MD5('123456'),100);
