@@ -1,8 +1,6 @@
 # 安装视频：
 
-链接：https://pan.baidu.com/s/1OdNtIPPzNf6rYYFjOOQ-cw 
-
-密码：21j6
+https://edu.51cto.com/center/course/lesson/index?id=843411
 
 -----------------------------------------------------------------------------
 
