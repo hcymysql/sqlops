@@ -7,7 +7,17 @@ https://edu.51cto.com/center/course/lesson/index?id=843411
 2023-01-08更新：
 
 新增pt-osc功能，研发可以在网页里执行大表Alter更改表结构操作。
+https://blog.51cto.com/hcymysql/5996723
 
+sqlops新增pt-osc功能，触发条件：
+
+1）当行记录小于150万行，研发可以直接在网页里执行Alter table操作。
+
+2）当行记录大于150万行并且小于3000行，平台将调用pt-online-schema-change开源工具在线执行Alter表结构变更。
+
+3）当行记录大于3000行时，提示：Alter更改表结构会引起表锁，影响业务。由于该表过大，平台不支持自助上线。
+
+--------------------------------------------------------------------------------------------
 ![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/%E9%A6%96%E9%A1%B5.png)
 
 2020-03-11更新：
