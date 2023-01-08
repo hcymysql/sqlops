@@ -17,11 +17,11 @@ if(preg_match("/^select|^insert|^update|^delete|^replace/i",trim($multi_key_sql[
 
 if(preg_match("/^create/i",trim($multi_key_sql[$x]))){
     $create_temp=preg_replace("/^create/i","CREATE TEMPORARY",trim($multi_key_sql[$x]));
-    $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port mysql --execute=\"${create_temp};\" 2>&1";
+    $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port tmp --execute=\"${create_temp};\" 2>&1";
 }
 
 if(preg_match("/^alter/i",trim($multi_key_sql[$x]))){
-   $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port mysql --execute=\"${multi_sql[$x]};\" 2>&1";
+   $dbsql_exec="/usr/local/mariadb/bin/mysql --default-character-set=utf8 --skip-column-names -h$ip -u$user -p"."'".$pwd."'"."  -P$port tmp --execute=\"${multi_sql[$x]};\" 2>&1";
 }
 
 $exec_result=exec("$dbsql_exec",$output,$return);
