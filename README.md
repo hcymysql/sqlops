@@ -1,3 +1,5 @@
+![image](https://raw.githubusercontent.com/hcymysql/sqlops/master/image/sqlops_chatgpt.png)
+
 # 安装视频：
 
 https://edu.51cto.com/center/course/lesson/index?id=843411
